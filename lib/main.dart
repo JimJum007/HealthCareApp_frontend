@@ -8,6 +8,7 @@ import 'screens/settings/Setting.dart'; // Import หน้า Setting
 import 'package:healthcare/providers/auth_provider.dart';
 import 'package:healthcare/providers/food_record_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:healthcare/providers/activity_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider<AuthProvider>.value(value: authProvider),
         ChangeNotifierProvider(create: (_) => FoodRecordProvider()), // เพิ่ม Provider
+        ChangeNotifierProvider(create: (_) => ActivityProvider()),
       ],
       child: MyApp(),
     ),
