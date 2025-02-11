@@ -91,7 +91,7 @@ class FoodRecordProvider with ChangeNotifier {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:3000/food-records'),
+        Uri.parse('http://192.168.159.215:3000/food-records'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
