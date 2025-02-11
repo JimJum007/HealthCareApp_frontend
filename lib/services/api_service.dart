@@ -64,20 +64,19 @@ class ApiService {
   }
 
   /// ✅ เพิ่มกิจกรรมใหม่
-  static Future<void> addActivity(String token, Map<String, dynamic> activity) async {
+  static Future<http.Response> addActivity(String token, Map<String, dynamic> activityData) async {
+    final Uri url = Uri.parse('http://192.168.159.215:3000/activity/add');
+
     final response = await http.post(
-      Uri.parse('$baseUrl/activity/add'),
+      url,
       headers: {
-        'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
       },
-      body: json.encode(activity),
+      body: jsonEncode(activityData),
     );
 
-    if (response.statusCode != 201) {
-      print('❌ Failed to add activity: ${response.statusCode}');
-      throw Exception('Failed to add activity');
-    }
+    return response; // ✅ คืนค่าผลลัพธ์ของ HTTP Response
   }
 
   /// ✅ อัปเดตกิจกรรม

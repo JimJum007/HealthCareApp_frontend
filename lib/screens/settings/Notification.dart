@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:healthcare/screens/health/Activity.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -46,58 +48,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   ];
 
   void _addNotification() {
-    // ฟังก์ชันเพิ่ม Notification ใหม่
-    showDialog(
-      context: context,
-      builder: (context) {
-        final TextEditingController titleController = TextEditingController();
-        final TextEditingController timeController = TextEditingController();
-        final TextEditingController dateController = TextEditingController();
-
-        return AlertDialog(
-          title: const Text('Add Notification'),
-          content: Column(
-
-            mainAxisSize: MainAxisSize.min,
-            children: [
-
-              TextField(
-                controller: titleController,
-                decoration: const InputDecoration(labelText: 'Title'),
-              ),
-              TextField(
-                controller: timeController,
-                decoration: const InputDecoration(labelText: 'Time'),
-              ),
-              TextField(
-                controller: dateController,
-                decoration: const InputDecoration(labelText: 'Date'),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Cancel'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _eventList.add({
-                    'title': titleController.text,
-                    'time': timeController.text,
-                    'date': dateController.text,
-                  });
-                });
-                Navigator.pop(context);
-              },
-              child: const Text('Add'),
-            ),
-          ],
-        );
-      },
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ActivityScreen()),
     );
   }
 
@@ -228,7 +181,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _addNotification,
+        onPressed: _addNotification, // ตอนนี้จะไปหน้า Activity เมื่อกด
         backgroundColor: Colors.cyan,
         child: const Icon(Icons.add, size: 30, color: Colors.white),
       ),

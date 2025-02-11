@@ -24,6 +24,7 @@ class _FoodRecordEditScreenState extends State<FoodRecordEditScreen> {
   String selectedMinute = '00';
   String menuName = '';
   String calories = '';
+  final FocusNode _menuFocusNode = FocusNode();
   late TextEditingController menuNameController;
   late TextEditingController caloriesController;
 
@@ -196,10 +197,17 @@ class _FoodRecordEditScreenState extends State<FoodRecordEditScreen> {
   }
 
   @override
+  void dispose() {
+    _menuFocusNode.dispose();
+    menuNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Edit Food Record')),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,11 +215,17 @@ class _FoodRecordEditScreenState extends State<FoodRecordEditScreen> {
             // 🔹 Input Menu Name
             Text("Menu Name"),
             TextField(
+              focusNode: _menuFocusNode,
               controller: menuNameController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Enter menu name",
               ),
+              onTap: () {
+                setState(() {
+                  _menuFocusNode.requestFocus();
+                });
+              },
               onChanged: (value) => menuName = value,
             ),
             SizedBox(height: 16),
