@@ -27,7 +27,7 @@ class FoodRecordProvider with ChangeNotifier {
 
     final token = authProvider.token;
     if (token == null) {
-      print('❌ No token found.');
+      print('No token found.');
       return;
     }
 

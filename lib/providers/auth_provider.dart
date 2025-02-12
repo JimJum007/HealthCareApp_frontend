@@ -41,13 +41,13 @@ class AuthProvider with ChangeNotifier {
         _userId = null;
       }
 
-      print('✅ Token Loaded: $_token');
-      print('✅ User ID Loaded: $_userId');
-      print('✅ IsAuthenticated: $_isAuthenticated');
+      print('Token Loaded: $_token');
+      print('User ID Loaded: $_userId');
+      print('IsAuthenticated: $_isAuthenticated');
 
       notifyListeners();
     } catch (e) {
-      print('❌ Error loading token: $e');
+      print('Error loading token: $e');
     }
   }
 
@@ -74,13 +74,12 @@ class AuthProvider with ChangeNotifier {
       await secureStorage.deleteAll();
       notifyListeners();
 
-      // ✅ ป้องกัน Navigator Error โดยตรวจสอบ context
       if (Navigator.canPop(context)) {
         Navigator.pop(context);
       }
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
     } catch (e) {
-      print('❌ Error during logout: $e');
+      print('Error during logout: $e');
     }
   }
 }
